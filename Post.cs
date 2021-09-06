@@ -10,7 +10,10 @@ namespace pa1
          public string DateTime {get; set;}
 
 
-        
+        public static int CompareByTime(Post x, Post y){ 
+            
+            return y.DateTime.CompareTo(x.DateTime);
+        }
 
         public override string ToString()
         {

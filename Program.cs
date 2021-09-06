@@ -8,11 +8,18 @@ namespace pa1
         static void Main(string[] args)
         {
             List<Post> posts = new List<Post>();
-            
+
             Console.WriteLine("Welcome to Big Al Goes Social!");
+            Console.WriteLine("Please enter the number of the menu item you would like to select:");
             Utilities.DisplayMenu();  //display menu
             int choice = UserChoice();  //get valid user choice
-            MenuActions(choice, posts);
+            while(choice !=4){
+                MenuActions(choice, posts);
+                System.Console.WriteLine("\nPlease select another menu item to continue or select '4' to exit");
+                Utilities.DisplayMenu();  //display menu
+                choice = UserChoice();  //get valid user choice
+            }
+            
 
             //handle error and ask user to do something else
             //keep asking user until they quit
@@ -45,7 +52,9 @@ namespace pa1
             switch(choice){
                 //get posts from file
                 case 1: //Show All Posts
+                    
                     posts = PostFile.GetPosts(); 
+                    posts.Sort(Post.CompareByTime);
                     Utilities.ShowPosts(posts);
                     break;
                 case 2: //Add a Post
@@ -53,7 +62,11 @@ namespace pa1
                     break;
                 case 3: //Delete Post
                     posts = PostFile.GetPosts(); 
+                    posts.Sort(Post.CompareByTime);
+                    Utilities.ShowPosts(posts);
                     PostFile.DeletePost(posts);
+                    posts.Sort(Post.CompareByTime);
+                    Utilities.ShowPosts(posts);
                     break;
                 case 4: //exit
                     break;

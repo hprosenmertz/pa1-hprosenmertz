@@ -33,7 +33,6 @@ namespace pa1
             }
             inFile.Close();
 
-
             return posts;
         }
 
@@ -89,11 +88,19 @@ namespace pa1
                 return;
             }
             
-            Console.WriteLine("Enter the ID number of the post you would like to delete:");
+            Console.WriteLine("\nEnter the ID number of the post you would like to delete:");
             int deleteId = int.Parse(Console.ReadLine());
+
+        
             post.Remove(new Post() {PostID = deleteId});
-            
-            UpdateFile(post);   //update file
+            for (int i = post.Count-1; i >=0; i--){
+                if (post[i].PostID == deleteId){
+                        post.RemoveAt(i);
+                    }
+            }
+         
+
+           UpdateFile(post);   //update file
 
         }
         public static void UpdateFile(List<Post> posts){
