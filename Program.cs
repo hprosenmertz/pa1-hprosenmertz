@@ -20,9 +20,6 @@ namespace pa1
                 choice = UserChoice();  //get valid user choice
             }
             
-
-            //handle error and ask user to do something else
-            //keep asking user until they quit
         }
         
 
@@ -32,7 +29,7 @@ namespace pa1
    
             while(choice != 1 && choice != 2 && choice != 3 && choice != 4){
                  try{ //try statement
-                    Console.WriteLine("Invalid Choice.");
+                    Console.WriteLine("Invalid Choice. Please choose one of the items below:");
                     Utilities.DisplayMenu();
                     choice = int.Parse(Console.ReadLine());
 
@@ -54,7 +51,7 @@ namespace pa1
                 case 1: //Show All Posts
                     
                     posts = PostFile.GetPosts(); 
-                    posts.Sort(Post.CompareByTime);
+                    posts.Sort(Post.CompareByTime); //list sort method
                     Utilities.ShowPosts(posts);
                     break;
                 case 2: //Add a Post

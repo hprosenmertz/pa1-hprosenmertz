@@ -18,7 +18,7 @@ namespace pa1
         }
 
         public static void ShowPosts(List<Post> posts){ 
-
+//for each loop to display posts
             System.Console.WriteLine("\nPosts: \n");
             foreach(Post post in posts){
                 Console.WriteLine(post.ToString());

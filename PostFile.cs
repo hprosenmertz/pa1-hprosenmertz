@@ -13,7 +13,7 @@ namespace pa1
             List<Post> posts = new List<Post>();
             StreamReader inFile = null; //need to initialize outside of try {}
 
-            //try-catch for error handling
+//try-catch for error handling
             try{
                 inFile = new StreamReader("posts.txt");
             }
@@ -27,7 +27,7 @@ namespace pa1
             while(line!=null){
                 string[] temp = line.Split("#");
                 int postID = int.Parse(temp[0]);
-                //method call to add object to list
+//List populated from file
                 posts.Add(new Post() {PostID = postID, Text = temp[1], DateTime = temp[2]});
                 line = inFile.ReadLine();  //update read
             }
@@ -90,14 +90,25 @@ namespace pa1
             
             Console.WriteLine("\nEnter the ID number of the post you would like to delete:");
             int deleteId = int.Parse(Console.ReadLine());
-
-        
+            bool exists = false;
+            
+        while (exists == false){
             post.Remove(new Post() {PostID = deleteId});
             for (int i = post.Count-1; i >=0; i--){
                 if (post[i].PostID == deleteId){
+                        exists = true;
                         post.RemoveAt(i);
                     }
             }
+
+            if(exists == false){
+                System.Console.WriteLine("There is no post with that id.  Please enter another ID to delete:");
+                deleteId = int.Parse(Console.ReadLine());
+            }
+        }
+
+
+            
          
 
            UpdateFile(post);   //update file
